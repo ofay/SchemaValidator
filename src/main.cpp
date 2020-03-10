@@ -1,6 +1,6 @@
 #include <iostream>
 #include "filereader.h"
-#include "message.h"
+#include "jsonvalidator.h"
 
 int main() {
     std::string path_to_schema, path_to_json;

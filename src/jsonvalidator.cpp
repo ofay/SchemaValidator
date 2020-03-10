@@ -1,4 +1,4 @@
-#include "message.h"
+#include "jsonvalidator.h"
 
 bool JsonValidator::isValid(rapidjson::Document sd, rapidjson::Document  doc) {
     rapidjson::SchemaDocument schema(sd);

@@ -1,5 +1,5 @@
-#ifndef SCHEMAVALIDATOR_MESSAGE_H
-#define SCHEMAVALIDATOR_MESSAGE_H
+#ifndef SCHEMAVALIDATOR_JSONVALIDATOR_H
+#define SCHEMAVALIDATOR_JSONVALIDATOR_H
 
 #include <iostream>
 #include "rapidjson/schema.h"
@@ -12,4 +12,4 @@ private:
 };
 
 
-#endif //SCHEMAVALIDATOR_MESSAGE_H
+#endif //SCHEMAVALIDATOR_JSONVALIDATOR_H
