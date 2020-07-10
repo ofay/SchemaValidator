@@ -2,11 +2,13 @@
 
 rapidjson::Document FileReader::parse(const std::string& path) {
     std::ifstream file(path);
-    if(!file.is_open()) std::cout << "Could not open file: " << path << std::endl;
+    if(!file.is_open()) {
+        throw std::runtime_error(std::string("Could not open file: ").append(path));
+    }
     rapidjson::IStreamWrapper is(file);
     rapidjson::Document doc;
     if(doc.ParseStream(is).HasParseError()){
-        std::cout << "Error parse: " << doc.GetParseError() << std::endl;
+        throw std::runtime_error(std::string("Error parse: ").append(std::to_string(doc.GetParseError())));
     }
     else return doc;
 }
