@@ -8,7 +8,8 @@ int main() {
     getline(std::cin, path_to_schema);
     std::cout << "Specify the path to the json file" << std::endl;
     getline(std::cin, path_to_json);
-    if (JsonValidator::isValid(FileReader::parse(path_to_schema), FileReader::parse(path_to_json))) {
+    JsonValidator jsonValidator(FileReader::parse(path_to_schema));
+    if (jsonValidator(FileReader::parse(path_to_json))) {
         std::cout << "Json is valid\n";
     }
     else {

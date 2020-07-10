@@ -4,10 +4,16 @@
 #include <iostream>
 #include "rapidjson/schema.h"
 #include "rapidjson/document.h"
+#include <utility>
 
 class JsonValidator {
+    rapidjson::Document _sd;
+    rapidjson::SchemaDocument* schema;
+    rapidjson::SchemaValidator* validator;
 public:
-    static bool isValid(rapidjson::Document sd, rapidjson::Document  doc);
+    explicit JsonValidator(rapidjson::Document sd);
+    bool operator()(const rapidjson::Document& doc);
+    ~JsonValidator();
 private:
 };
 

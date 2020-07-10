@@ -1,47 +1,130 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "id": "http://jsonschema.net",
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
   "type": "object",
-  "properties": {
-    "address": {
-      "id": "http://jsonschema.net/address",
-      "type": "object",
-      "properties": {
-        "streetAddress": {
-          "id": "http://jsonschema.net/address/streetAddress",
-          "type": "string"
-        },
-        "city": {
-          "id": "http://jsonschema.net/address/city",
-          "type": "string"
-        }
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": {},
+  "examples": [
+    {
+      "address": {
+        "streetAddress": "21 2nd Street",
+        "city": "New York"
       },
-      "required": [
-        "streetAddress",
-        "city"
-      ]
-    },
-    "phoneNumber": {
-      "id": "http://jsonschema.net/phoneNumber",
-      "type": "array",
-      "items": {
-        "id": "http://jsonschema.net/phoneNumber/0",
-        "type": "object",
-        "properties": {
-          "location": {
-            "id": "http://jsonschema.net/phoneNumber/0/location",
-            "type": "string"
-          },
-          "code": {
-            "id": "http://jsonschema.net/phoneNumber/0/code",
-            "type": "integer"
-          }
+      "phoneNumber": [
+        {
+          "location": "home",
+          "code": 44
         }
-      }
+      ]
     }
-  },
+  ],
   "required": [
     "address",
     "phoneNumber"
-  ]
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "address": {
+      "$id": "#/properties/address",
+      "type": "object",
+      "title": "The address schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "streetAddress": "21 2nd Street",
+          "city": "New York"
+        }
+      ],
+      "required": [
+        "streetAddress",
+        "city"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "streetAddress": {
+          "$id": "#/properties/address/properties/streetAddress",
+          "type": "string",
+          "title": "The streetAddress schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "21 2nd Street"
+          ]
+        },
+        "city": {
+          "$id": "#/properties/address/properties/city",
+          "type": "string",
+          "title": "The city schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "New York"
+          ]
+        }
+      }
+    },
+    "phoneNumber": {
+      "$id": "#/properties/phoneNumber",
+      "type": "array",
+      "title": "The phoneNumber schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": [],
+      "examples": [
+        [
+          {
+            "location": "home",
+            "code": 44
+          }
+        ]
+      ],
+      "additionalItems": true,
+      "items": {
+        "anyOf": [
+          {
+            "$id": "#/properties/phoneNumber/items/anyOf/0",
+            "type": "object",
+            "title": "The first anyOf schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+              {
+                "location": "home",
+                "code": 44
+              }
+            ],
+            "required": [
+              "location",
+              "code"
+            ],
+            "additionalProperties": true,
+            "properties": {
+              "location": {
+                "$id": "#/properties/phoneNumber/items/anyOf/0/properties/location",
+                "type": "string",
+                "title": "The location schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "home"
+                ]
+              },
+              "code": {
+                "$id": "#/properties/phoneNumber/items/anyOf/0/properties/code",
+                "type": "integer",
+                "title": "The code schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": 0,
+                "examples": [
+                  44
+                ]
+              }
+            }
+          }
+        ],
+        "$id": "#/properties/phoneNumber/items"
+      }
+    }
+  }
 }
